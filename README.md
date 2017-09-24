@@ -11,9 +11,13 @@ Pode utilizar a tecnologia que quiser para o desafio - não queremos avaliar a t
 #### Notas e dicas
 
 Os dados dos itens podem ser mockados - não é necessário desenvolver uma API para o desafio.
+
 Capricho é f-u-n-d-a-m-e-n-t-a-l. Desenvolva algo com a qualidade que você colocaria em produção!
+
 Em relação as API_KEYs e outros dados: Para o desafio, não é necessário o cuidado colocá-las num servidor (fique a vontade para fazê-lo se quiser!) - queremos avaliar suas habilidade front-end em geral.
+
 Cumprindo o objetivo principal, você está livre para criar e adicionar features que achar que fazem sentido (utilizando nossa API ou de terceiros)
+
 Documentação da API (https://docs.pagar.me/reference)
 
 # Sobre o projeto
