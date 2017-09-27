@@ -47,13 +47,6 @@ module.exports = {
       cache: true,
       hash: true
     }),
-    new UglifyJSPlugin({
-      compress: true,
-      sourceMap: true,
-      beautify: false,
-      extractComments: false,
-      drop_console: true
-    }),
     new ExtractTextPlugin({
       filename: './public/app.css',
       allChunks: true

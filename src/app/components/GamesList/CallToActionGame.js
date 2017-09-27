@@ -35,7 +35,9 @@ export default class CallToActionGame extends Component {
         <Jumbotron className={styles.dark_jumbotron}>
           <Container>
             <h1 className="display-6">{name ? name : 'Carregando nome...'}</h1>
-            <p className="lead">{description ? description.short : 'Carregando descrição...'}</p>
+            <p className="lead">
+              {description ? description.short : 'Carregando descrição...'}
+            </p>
             <p className="lead">
               <a className="btn btn-lg btn-primary" href={`/games/${id}`}>
                 Ver detalhes

@@ -1,7 +1,12 @@
 import McFly from 'mcfly';
 
+//Games
 import actionsGames from './actions/games';
 import storeGames from './stores/games';
+
+//Checkout
+import actionsCheckout from './actions/checkout';
+import storeCheckout from './stores/checkout';
 
 const Flux = new McFly();
 
@@ -18,13 +23,30 @@ const GamesStores = Flux.createStore(storeGames, function(payload) {
   return true;
 });
 
+const CheckoutStores = Flux.createStore(storeCheckout, function(payload) {
+  switch (payload.actionType) {
+    case 'CHECKOUTADDGAME':
+      CheckoutStores.setGamesList(payload.data);
+      CheckoutStores.increaseTotalAmount();
+      CheckoutStores.increaseTotalPrice(payload.data.price);
+      break;
+
+    default:
+      return false;
+  }
+
+  return true;
+});
+
 const aliases = {
   actions: {
-    games: Flux.createActions(actionsGames)
+    games: Flux.createActions(actionsGames),
+    checkout: Flux.createActions(actionsCheckout)
   },
 
   store: {
-    games: GamesStores
+    games: GamesStores,
+    checkout: CheckoutStores
   }
 };
 

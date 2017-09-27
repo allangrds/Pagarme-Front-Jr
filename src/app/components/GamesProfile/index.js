@@ -19,6 +19,14 @@ export default class GamesProfile extends Component {
     return game[0];
   }
 
+  addGameToCheckout() {
+    const game = this.state;
+
+    actions.checkout.addGame(game).then(() => {
+      store.checkout.emit('insertedGameToCheckout');
+    });
+  }
+
   componentDidMount() {
     actions.games.get().then(() => {
       const gamesList = store.games.getGamesList();
@@ -43,14 +51,36 @@ export default class GamesProfile extends Component {
         <Container>
           <Row>
             <Col md="4" xs="12">
-              <img src={image && image.cover} alt={name} className={styles.game_detail_cover}/>
+              <img
+                src={image && image.cover}
+                alt={name}
+                className={styles.game_detail_cover}
+              />
             </Col>
             <Col md="8" xs="12">
               <h1>{name ? name : 'Carregando nome...'}</h1>
-              <p className={styles.game_detail_description}>{description ? description.long : 'Carregando descrição...'}</p>
-              <p className={styles.game_detail_price}>{price ? <Numeral value={price} format="$ 0,0.00" /> : 'Carregando preço...'}</p>
-              <Button color="primary" size="lg">
-                <i className={classNames("fa fa-shopping-cart", styles.game_detail_add_icon)}aria-hidden="true" />
+              <p className={styles.game_detail_description}>
+                {description ? description.long : 'Carregando descrição...'}
+              </p>
+              <p className={styles.game_detail_price}>
+                {price ? (
+                  <Numeral value={price} format="$ 0,0.00" />
+                ) : (
+                  'Carregando preço...'
+                )}
+              </p>
+              <Button
+                color="primary"
+                size="lg"
+                onClick={this.addGameToCheckout.bind(this)}
+              >
+                <i
+                  className={classNames(
+                    'fa fa-shopping-cart',
+                    styles.game_detail_add_icon
+                  )}
+                  aria-hidden="true"
+                />
                 Adicionar ao carrinho
               </Button>
             </Col>

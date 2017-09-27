@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import styles from './../../assets/css/components/menu.styl';
 import classNames from 'classnames';
+import { store } from './../flux';
 
 export default class Base extends Component {
   constructor(props) {
@@ -18,8 +19,17 @@ export default class Base extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      amount: 0
     };
+  }
+
+  componentDidMount() {
+    store.checkout.on('insertedGameToCheckout', () =>
+      this.setState({
+        amount: store.checkout.getTotalAmount()
+      })
+    );
   }
 
   toggle() {
@@ -29,6 +39,8 @@ export default class Base extends Component {
   }
 
   render() {
+    const { amount } = this.state;
+
     return (
       <div>
         <Navbar toggleable className={styles.navbar_dark}>
@@ -48,7 +60,7 @@ export default class Base extends Component {
                     )}
                   >
                     <i className="fa fa-shopping-basket" aria-hidden="true" />
-                    Meu carrinho (2)
+                    Meu carrinho ({amount})
                   </NavLink>
                 </NavItem>
               </Nav>
