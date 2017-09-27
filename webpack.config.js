@@ -1,23 +1,24 @@
-const path              = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin    = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: './src/app/index.js',
-    output: {
-        path: path.resolve(__dirname, "./public"),
-        filename: 'bundle.js',
-        publicPath: '/',
-    },
-    module: {
-      loaders: [{
+  entry: './src/app/index.js',
+  output: {
+    path: path.resolve(__dirname, './public'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
+  module: {
+    loaders: [
+      {
         test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          query: {
-                presets: ['es2015', 'react']
-            }
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        }
       },
       {
         test: /\.styl$/,
@@ -34,32 +35,34 @@ module.exports = {
             }
           ]
         })
-      }]
-    },
-    devtool: 'source-map',
-    plugins: [
-      new HtmlWebpackPlugin({
-          template: path.join(__dirname, './public/index.html'),
-          filename: 'index.html',
-          inject: 'body',
-          cache: true,
-          hash: true,
-      }),
-      new UglifyJSPlugin({
-        compress: true,
-        sourceMap: true,
-        beautify: false,
-        extractComments: false
-      }),
-      new ExtractTextPlugin({
-        filename: './public/app.css',
-        allChunks: true
-      })
-    ],
-    devServer: {
-        inline: true,
-        contentBase: './public',
-        port: 3000,
-        historyApiFallback: true
-    },
-}
+      }
+    ]
+  },
+  devtool: 'source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, './public/index.html'),
+      filename: 'index.html',
+      inject: 'body',
+      cache: true,
+      hash: true
+    }),
+    new UglifyJSPlugin({
+      compress: true,
+      sourceMap: true,
+      beautify: false,
+      extractComments: false,
+      drop_console: true
+    }),
+    new ExtractTextPlugin({
+      filename: './public/app.css',
+      allChunks: true
+    })
+  ],
+  devServer: {
+    inline: true,
+    contentBase: './public',
+    port: 3000,
+    historyApiFallback: true
+  }
+};
