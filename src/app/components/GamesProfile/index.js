@@ -24,7 +24,6 @@ export default class GamesProfile extends Component {
 
     actions.checkout.addGame(game).then(() => {
       store.checkout.emit("insertedGameToCheckout");
-      console.log(store.checkout.getGamesList());
     });
   }
 

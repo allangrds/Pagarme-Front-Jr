@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 import {
-  //BrowserRouter as Router,
   HashRouter as Router,
   Switch,
   Route,
   browserHistory,
   NavLink
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import GamesList from '../components/GamesList';
-import GamesProfile from '../components/GamesProfile';
-import Base from '../components/Base';
+import Base from "../components/Base";
+import GamesList from "../components/GamesList";
+import GamesProfile from "../components/GamesProfile";
+import Checkout from "../components/Checkout";
 
 const NotFound = () => <h1>NotFound</h1>;
 
@@ -20,7 +20,8 @@ const Routes = () => (
       <Base />
       <Switch>
         <Route exact path="/" component={GamesList} />
-        <Route exact path="/games/:id" component={GamesProfile} />
+        <Route path="/games/:id" component={GamesProfile} />
+        <Route path="/checkout" component={Checkout} />
         <Route component={NotFound} />
       </Switch>
     </div>
