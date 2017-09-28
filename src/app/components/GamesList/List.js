@@ -8,7 +8,6 @@ import {
   CardText,
   CardBlock,
   CardTitle,
-  CardSubtitle,
   Button
 } from 'reactstrap';
 import { actions, store } from './../../flux';
