@@ -12,6 +12,7 @@ import {
 import styles from './../../assets/css/components/menu.styl';
 import classNames from 'classnames';
 import { store } from './../flux';
+import { Link } from 'react-router-dom';
 
 export default class Base extends Component {
   constructor(props) {
@@ -46,9 +47,9 @@ export default class Base extends Component {
         <Navbar toggleable className={styles.navbar_dark}>
           <NavbarToggler right onClick={this.toggle} />
           <Container>
-            <NavbarBrand href="/" className={styles.navbar_link_white}>
+            <Link className={classNames('navbar-brand', styles.navbar_link_white)} to='/'>
               Jogar.me
-            </NavbarBrand>
+            </Link>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>

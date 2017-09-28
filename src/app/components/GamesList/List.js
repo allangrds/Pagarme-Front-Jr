@@ -14,6 +14,7 @@ import {
 import { actions, store } from './../../flux';
 import styles from './../../../assets/css/pages/call_to_action_game.styl';
 import Numeral from './../../helpers/Numeral';
+import { Link } from 'react-router-dom';
 
 export default class List extends Component {
   constructor() {
@@ -53,12 +54,9 @@ export default class List extends Component {
                         <CardText className={styles.game_item_price}>
                           <Numeral value={price} format="$ 0,0.00" />
                         </CardText>
-                        <a
-                          className="btn btn-md btn-primary"
-                          href={`/games/${id}`}
-                        >
+                        <Link className="btn btn-lg btn-primary" to={{ pathname: `/games/${id}` }}>
                           Ver detalhes
-                        </a>
+                        </Link>
                       </CardBlock>
                     </Card>
                   </Col>
