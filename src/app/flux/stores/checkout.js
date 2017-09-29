@@ -13,6 +13,10 @@ const checkout = function() {
       return gamesList;
     },
 
+    resetGamesList() {
+      gamesList = [];
+    },
+
     //totalAmount
     increaseTotalAmount(data) {
       totalAmount += 1;
@@ -26,6 +30,10 @@ const checkout = function() {
       return totalAmount;
     },
 
+    resetTotalAmount() {
+      totalAmount = 0;
+    },
+
     //totalPrice
     increaseTotalPrice(data) {
       totalPrice = data;
@@ -37,6 +45,10 @@ const checkout = function() {
 
     getTotalPrice() {
       return totalPrice;
+    },
+
+    resetTotalPrice() {
+      totalPrice = 0;
     }
   };
 };

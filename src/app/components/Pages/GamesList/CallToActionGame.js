@@ -15,15 +15,26 @@ export default class CallToActionGame extends Component {
       store.games.emit('loadGamesList');
 
       const gamesList = store.games.getGamesList();
-      const gamePosition = Math.floor(Math.random() * gamesList.length) + 1;
+      const gamesListLength = gamesList.length;
 
-      this.setState({
-        id: gamesList[gamePosition].id,
-        name: gamesList[gamePosition].name,
-        image: gamesList[gamePosition].image,
-        description: gamesList[gamePosition].description
-      });
+      let gamePosition = this.generateGamesListIndex(gamesListLength);
+
+      for (let i = 0; i < 1; ) {
+        if (gamesList[gamePosition]) {
+          i = 1;
+          this.setState({
+            id: gamesList[gamePosition].id,
+            name: gamesList[gamePosition].name,
+            image: gamesList[gamePosition].image,
+            description: gamesList[gamePosition].description
+          });
+        } else gamePosition = this.generateGamesListIndex(gamesListLength);
+      }
     });
+  }
+
+  generateGamesListIndex(length) {
+    return Math.floor(Math.random() * length) + 1;
   }
 
   render() {

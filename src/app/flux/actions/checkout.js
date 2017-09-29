@@ -6,6 +6,12 @@ const checkout = {
       data: game,
       actionType: 'CHECKOUTADDGAME'
     };
+  },
+
+  resetCheckout() {
+    return {
+      actionType: 'CHECKOUTRESETLIST'
+    };
   }
 };
 

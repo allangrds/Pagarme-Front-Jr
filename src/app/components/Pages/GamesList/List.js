@@ -39,7 +39,14 @@ export default class List extends Component {
             {gamesList &&
               gamesList.map(
                 ({ id, name, description, price, image }, index) => (
-                  <Col lg="3" md="4" sm="6" xs="6" key={id}>
+                  <Col
+                    lg="3"
+                    md="6"
+                    sm="6"
+                    xs="12"
+                    key={id}
+                    className={styles.game_item}
+                  >
                     <Card>
                       <CardImg
                         top
