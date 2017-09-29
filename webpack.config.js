@@ -21,6 +21,11 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: 'style-loader!css-loader'
+      },
+      {
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',

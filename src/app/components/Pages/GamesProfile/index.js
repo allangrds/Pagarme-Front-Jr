@@ -4,6 +4,8 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import styles from './GamesProfile.styl';
 import Numeral from './../../../helpers/Numeral';
 import classNames from 'classnames';
+import { ToastContainer, ToastMessage } from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 export default class GamesProfile extends Component {
   constructor() {
@@ -22,9 +24,30 @@ export default class GamesProfile extends Component {
   addGameToCheckout() {
     const game = this.state;
 
-    actions.checkout.addGame(game).then(() => {
-      store.checkout.emit('insertedGameToCheckout');
-    });
+    actions.checkout
+      .addGame(game)
+      .then(() => {
+        store.checkout.emit('insertedGameToCheckout');
+        this.showNotification(
+          'Sucesso',
+          'Game adicionado ao carrinho',
+          'success'
+        );
+      })
+      .catch(() => {
+        this.showNotification('Erro', 'Game não adicionado', 'error');
+      });
+  }
+
+  showNotification(title, message, type) {
+    const options = {
+      closeButton: true,
+      timeOut: 1000
+    };
+
+    if (type === 'success')
+      this.refs.container.success(message, title, options);
+    else this.refs.container.error(message, title, options);
   }
 
   componentDidMount() {
@@ -48,6 +71,11 @@ export default class GamesProfile extends Component {
 
     return (
       <div className={styles.game_detail}>
+        <ToastContainer
+          toastMessageFactory={ToastMessageFactory}
+          ref="container"
+          className="toast-top-right"
+        />
         <Container>
           <Row>
             <Col md="4" xs="12">

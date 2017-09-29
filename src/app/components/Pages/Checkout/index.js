@@ -6,11 +6,14 @@ import Numeral from './../../../helpers/Numeral';
 import classNames from 'classnames';
 import pagarme from 'pagarme';
 import { Redirect } from 'react-router-dom';
+import Loading from './Loading';
+import { ToastContainer, ToastMessage } from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 export default class Checkout extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { loading: false };
   }
 
   componentDidMount() {
@@ -33,6 +36,8 @@ export default class Checkout extends Component {
 
     totalPrice *= 100;
     totalPrice = parseInt(totalPrice.toFixed(0));
+
+    this.setState({ loading: true });
 
     pagarme.client
       .connect({ api_key: 'ak_test_LruwUrqpEUK9qhGhSKDteaFg894egM' })
@@ -112,14 +117,25 @@ export default class Checkout extends Component {
             const url = '/done';
             this.props.history.push(url);
           })
+          .catch(() => {
+            this.setState({ loading: false });
+            this.refs.container.error('Erro', 'Pedido não concluido', 'error');
+          })
       );
   }
 
   render() {
-    const { amount, totalPrice, gamesList } = this.state;
+    const { amount, totalPrice, gamesList, loading } = this.state;
 
-    return (
+    return loading ? (
+      <Loading />
+    ) : (
       <div className={styles.checkout}>
+        <ToastContainer
+          toastMessageFactory={ToastMessageFactory}
+          ref="container"
+          className="toast-top-right"
+        />
         <Container>
           <Row>
             <Col md="12">
