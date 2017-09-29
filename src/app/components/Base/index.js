@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Navbar,
   Container,
@@ -8,11 +8,11 @@ import {
   Nav,
   NavItem,
   NavLink
-} from "reactstrap";
-import styles from "./../../assets/css/components/menu.styl";
-import classNames from "classnames";
-import { store } from "./../flux";
-import { Link } from "react-router-dom";
+} from 'reactstrap';
+import styles from './Base.styl';
+import classNames from 'classnames';
+import { store } from './../../flux';
+import { Link } from 'react-router-dom';
 
 export default class Base extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class Base extends Component {
   }
 
   componentDidMount() {
-    store.checkout.on("insertedGameToCheckout", () =>
+    store.checkout.on('insertedGameToCheckout', () =>
       this.setState({
         amount: store.checkout.getTotalAmount()
       })
@@ -48,7 +48,7 @@ export default class Base extends Component {
           <NavbarToggler right onClick={this.toggle} />
           <Container>
             <Link
-              className={classNames("navbar-brand", styles.navbar_link_white)}
+              className={classNames('navbar-brand', styles.navbar_link_white)}
               to="/"
             >
               Jogar.me
@@ -58,7 +58,7 @@ export default class Base extends Component {
                 <NavItem>
                   <Link
                     className={classNames(
-                      "nav-link",
+                      'nav-link',
                       styles.navbar_link_white,
                       styles.navbar_basket
                     )}

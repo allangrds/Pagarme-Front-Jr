@@ -30,7 +30,7 @@ module.exports = {
             {
               loader: 'stylus-resources-loader',
               options: {
-                resources: './src/assets/css/**/*.styl'
+                resources: './src/**/*.styl'
               }
             }
           ]

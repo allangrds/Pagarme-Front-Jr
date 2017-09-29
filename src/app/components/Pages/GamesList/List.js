@@ -10,9 +10,9 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { actions, store } from './../../flux';
-import styles from './../../../assets/css/pages/call_to_action_game.styl';
-import Numeral from './../../helpers/Numeral';
+import { actions, store } from './../../../flux';
+import styles from './GamesList.styl';
+import Numeral from './../../../helpers/Numeral';
 import { Link } from 'react-router-dom';
 
 export default class List extends Component {
@@ -53,7 +53,10 @@ export default class List extends Component {
                         <CardText className={styles.game_item_price}>
                           <Numeral value={price} format="$ 0,0.00" />
                         </CardText>
-                        <Link className="btn btn-lg btn-primary" to={{ pathname: `/games/${id}` }}>
+                        <Link
+                          className="btn btn-lg btn-primary"
+                          to={{ pathname: `/games/${id}` }}
+                        >
                           Ver detalhes
                         </Link>
                       </CardBlock>

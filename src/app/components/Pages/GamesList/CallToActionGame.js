@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Button, Jumbotron } from 'reactstrap';
-import styles from './../../../assets/css/pages/call_to_action_game.styl';
-import { actions, store } from './../../flux';
+import styles from './GamesList.styl';
+import { actions, store } from './../../../flux';
 import { Link } from 'react-router-dom';
 
 export default class CallToActionGame extends Component {
@@ -40,7 +40,10 @@ export default class CallToActionGame extends Component {
               {description ? description.short : 'Carregando descrição...'}
             </p>
             <p className="lead">
-              <Link className="btn btn-lg btn-primary" to={{ pathname: `/games/${id}` }}>
+              <Link
+                className="btn btn-lg btn-primary"
+                to={{ pathname: `/games/${id}` }}
+              >
                 Ver detalhes
               </Link>
             </p>
