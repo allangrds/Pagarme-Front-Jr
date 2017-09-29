@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import styles from "./../../../assets/css/pages/done.styl";
-import Numeral from "./../../helpers/Numeral";
-import { store } from './../../flux';
+import React, { Component } from 'react';
+import styles from './Done.styl';
+import Numeral from './../../../helpers/Numeral';
+import { store } from './../../../flux';
 import {
   Alert,
   Container,
@@ -10,7 +10,7 @@ import {
   Card,
   CardText,
   CardBlock,
-  CardTitle,
+  CardTitle
 } from 'reactstrap';
 
 export default class Done extends Component {
@@ -44,9 +44,7 @@ export default class Done extends Component {
           </Row>
           <Row>
             <Col md="12">
-              <Alert color="success">
-                Parabéns! Você fechou seu pedido.
-              </Alert>
+              <Alert color="success">Parabéns! Você fechou seu pedido.</Alert>
             </Col>
           </Row>
           <Row>
@@ -55,8 +53,15 @@ export default class Done extends Component {
                 <CardBlock>
                   <CardTitle>Fornecedor</CardTitle>
                   <CardText>
-                    <p className={styles.done_card_rate_item}>Percentual: 60%</p>
-                    <p className={styles.done_card_rate_item}>Valor a receber: {totalPrice && <Numeral value={totalPrice * 0.6} format="$ 0,0.00" />}</p>
+                    <p className={styles.done_card_rate_item}>
+                      Percentual: 60%
+                    </p>
+                    <p className={styles.done_card_rate_item}>
+                      Valor a receber:{' '}
+                      {totalPrice && (
+                        <Numeral value={totalPrice * 0.6} format="$ 0,0.00" />
+                      )}
+                    </p>
                   </CardText>
                 </CardBlock>
               </Card>
@@ -66,8 +71,15 @@ export default class Done extends Component {
                 <CardBlock>
                   <CardTitle>Eu</CardTitle>
                   <CardText>
-                    <p className={styles.done_card_rate_item}>Percentual: 25%</p>
-                    <p className={styles.done_card_rate_item}>Valor a receber: {totalPrice && <Numeral value={totalPrice * 0.25} format="$ 0,0.00" />}</p>
+                    <p className={styles.done_card_rate_item}>
+                      Percentual: 25%
+                    </p>
+                    <p className={styles.done_card_rate_item}>
+                      Valor a receber:{' '}
+                      {totalPrice && (
+                        <Numeral value={totalPrice * 0.25} format="$ 0,0.00" />
+                      )}
+                    </p>
                   </CardText>
                 </CardBlock>
               </Card>
@@ -77,8 +89,15 @@ export default class Done extends Component {
                 <CardBlock>
                   <CardTitle>Meu amigo</CardTitle>
                   <CardText>
-                    <p className={styles.done_card_rate_item}>Percentual: 15%</p>
-                    <p className={styles.done_card_rate_item}>Valor a receber: {totalPrice && <Numeral value={totalPrice * 0.15} format="$ 0,0.00" />}</p>
+                    <p className={styles.done_card_rate_item}>
+                      Percentual: 15%
+                    </p>
+                    <p className={styles.done_card_rate_item}>
+                      Valor a receber:{' '}
+                      {totalPrice && (
+                        <Numeral value={totalPrice * 0.15} format="$ 0,0.00" />
+                      )}
+                    </p>
                   </CardText>
                 </CardBlock>
               </Card>

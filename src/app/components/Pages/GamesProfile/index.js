@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { actions, store } from "./../../flux";
-import { Container, Row, Col, Button } from "reactstrap";
-import styles from "./../../../assets/css/pages/games_detail.styl";
-import Numeral from "./../../helpers/Numeral";
-import classNames from "classnames";
+import React, { Component } from 'react';
+import { actions, store } from './../../../flux';
+import { Container, Row, Col, Button } from 'reactstrap';
+import styles from './GamesProfile.styl';
+import Numeral from './../../../helpers/Numeral';
+import classNames from 'classnames';
 
 export default class GamesProfile extends Component {
   constructor() {
@@ -23,7 +23,7 @@ export default class GamesProfile extends Component {
     const game = this.state;
 
     actions.checkout.addGame(game).then(() => {
-      store.checkout.emit("insertedGameToCheckout");
+      store.checkout.emit('insertedGameToCheckout');
     });
   }
 
@@ -58,15 +58,15 @@ export default class GamesProfile extends Component {
               />
             </Col>
             <Col md="8" xs="12">
-              <h1>{name ? name : "Carregando nome..."}</h1>
+              <h1>{name ? name : 'Carregando nome...'}</h1>
               <p className={styles.game_detail_description}>
-                {description ? description.long : "Carregando descrição..."}
+                {description ? description.long : 'Carregando descrição...'}
               </p>
               <p className={styles.game_detail_price}>
                 {price ? (
                   <Numeral value={price} format="$ 0,0.00" />
                 ) : (
-                  "Carregando preço..."
+                  'Carregando preço...'
                 )}
               </p>
               <Button
@@ -76,7 +76,7 @@ export default class GamesProfile extends Component {
               >
                 <i
                   className={classNames(
-                    "fa fa-shopping-cart",
+                    'fa fa-shopping-cart',
                     styles.game_detail_add_icon
                   )}
                   aria-hidden="true"
