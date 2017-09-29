@@ -19,10 +19,7 @@ export default class Checkout extends Component {
   componentDidMount() {
     const gamesList = store.checkout.getGamesList();
     const amount = gamesList.length;
-    const totalPrice = gamesList.reduce(
-      (prevVal, elem) => prevVal + elem.price,
-      0
-    );
+    const totalPrice = this.calculateTotalPrice(gamesList);
 
     this.setState({
       gamesList,
@@ -31,11 +28,20 @@ export default class Checkout extends Component {
     });
   }
 
-  makePagarmeTransaction() {
-    let { totalPrice } = this.state;
+  calculateTotalPrice(gamesList) {
+    let totalPrice = gamesList.reduce(
+      (prevVal, elem) => prevVal + elem.price,
+      0
+    );
 
     totalPrice *= 100;
     totalPrice = parseInt(totalPrice.toFixed(0));
+
+    return totalPrice;
+  }
+
+  makePagarmeTransaction() {
+    let { totalPrice } = this.state;
 
     this.setState({ loading: true });
 
@@ -119,9 +125,65 @@ export default class Checkout extends Component {
           })
           .catch(() => {
             this.setState({ loading: false });
-            this.refs.container.error('Erro', 'Pedido não concluido', 'error');
+            this.showNotification('Erro', 'Pedido não concluido', 'error');
           })
       );
+  }
+
+  findGameToRemove(array, length, gameToRemoveId) {
+    let gameToRemoveInArray = null;
+
+    for (let i = 0; i < length; i++) {
+      if (array[i].id == gameToRemoveId) {
+        gameToRemoveInArray = i;
+        break;
+      }
+    }
+
+    return gameToRemoveInArray;
+  }
+
+  removeGame(e) {
+    const button = e.currentTarget;
+    const gameToRemoveId = button.getAttribute('data-id');
+    const gamesList = store.checkout.getGamesList();
+    let gamesListLength = gamesList.length;
+    let gameToRemoveInArray = this.findGameToRemove(
+      gamesList,
+      gamesListLength,
+      gameToRemoveId
+    );
+
+    gamesList.splice(gameToRemoveInArray, 1);
+    gamesListLength = gamesList.length;
+
+    const totalPrice = this.calculateTotalPrice(gamesList);
+
+    this.overwriteCheckout(gamesList, gamesListLength, totalPrice);
+  }
+
+  overwriteCheckout(gamesList, gamesListLength, totalPrice) {
+    this.setState({
+      gamesList,
+      amount: gamesListLength,
+      totalPrice
+    });
+
+    actions.checkout.overwriteCheckout(gamesList).then(() => {
+      store.checkout.emit('insertedGameToCheckout');
+      this.showNotification('Sucesso', 'Game excluído', 'success');
+    });
+  }
+
+  showNotification(title, message, type) {
+    const options = {
+      closeButton: true,
+      timeOut: 1000
+    };
+
+    if (type === 'success')
+      this.refs.container.success(message, title, options);
+    else this.refs.container.error(message, title, options);
   }
 
   render() {
@@ -148,6 +210,7 @@ export default class Checkout extends Component {
                 <Table>
                   <thead>
                     <tr>
+                      <th />
                       <th>Nome do jogo</th>
                       <th>Quantidade</th>
                       <th>Preço</th>
@@ -156,7 +219,7 @@ export default class Checkout extends Component {
                   <tfoot>
                     <tr>
                       <td
-                        colSpan="3"
+                        colSpan="4"
                         className={classNames(styles.checkout_total_price)}
                       >
                         <Numeral value={totalPrice} format="$ 0,0.00" />
@@ -164,8 +227,25 @@ export default class Checkout extends Component {
                     </tr>
                   </tfoot>
                   <tbody>
-                    {gamesList.map(({ name, image, price }) => [
+                    {gamesList.map(({ id, name, image, price }) => [
                       <tr>
+                        <td>
+                          <Button
+                            data-id={id}
+                            size="md"
+                            color="danger"
+                            onClick={this.removeGame.bind(this)}
+                          >
+                            <i className="fa fa-times" aria-hidden="true" />
+                            <span
+                              className={
+                                styles.checkout_item_remove_button_text
+                              }
+                            >
+                              Remover
+                            </span>
+                          </Button>
+                        </td>
                         <td>
                           <img
                             className={styles.checkout_item_image}

@@ -35,6 +35,11 @@ const CheckoutStores = Flux.createStore(storeCheckout, function(payload) {
       CheckoutStores.resetGamesList();
       break;
 
+    case 'CHECKOUTOVERWRITE':
+      CheckoutStores.overwriteGamesList(payload.data);
+      CheckoutStores.decreaseTotalAmount();
+      break;
+
     default:
       return false;
   }

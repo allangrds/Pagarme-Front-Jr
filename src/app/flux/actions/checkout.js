@@ -12,6 +12,13 @@ const checkout = {
     return {
       actionType: 'CHECKOUTRESETLIST'
     };
+  },
+
+  overwriteCheckout(game) {
+    return {
+      data: game,
+      actionType: 'CHECKOUTOVERWRITE'
+    };
   }
 };
 

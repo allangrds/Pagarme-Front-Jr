@@ -16,6 +16,10 @@ const checkout = function() {
       gamesList = [];
     },
 
+    overwriteGamesList(data) {
+      gamesList = data;
+    },
+
     //totalAmount
     increaseTotalAmount(data) {
       totalAmount += 1;
