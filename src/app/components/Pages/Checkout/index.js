@@ -114,30 +114,14 @@ export default class Checkout extends Component {
             ]
           })
           .then(res => {
-            this.resetCheckoutValues()
-              .then(() => {
-                store.checkout.emit('insertedGameToCheckout');
-
-                this.redirectToDone();
-              })
-              .catch(() => {
-                this.redirectToDone();
-              });
+            const url = '/done';
+            this.props.history.push(url);
           })
           .catch(() => {
             this.setState({ loading: false });
             this.refs.container.error('Erro', 'Pedido não concluido', 'error');
           })
       );
-  }
-
-  redirectToDone() {
-    const url = '/done';
-    this.props.history.push(url);
-  }
-
-  resetCheckoutValues() {
-    return actions.checkout.resetCheckout();
   }
 
   render() {

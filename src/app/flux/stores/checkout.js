@@ -1,7 +1,6 @@
 const checkout = function() {
   let gamesList = [];
   let totalAmount = 0;
-  let totalPrice = 0;
 
   return {
     //gamesList
@@ -32,23 +31,6 @@ const checkout = function() {
 
     resetTotalAmount() {
       totalAmount = 0;
-    },
-
-    //totalPrice
-    increaseTotalPrice(data) {
-      totalPrice = data;
-    },
-
-    decreaseTotalPrice(data) {
-      if (totalPrice > 0) totalPrice -= data;
-    },
-
-    getTotalPrice() {
-      return totalPrice;
-    },
-
-    resetTotalPrice() {
-      totalPrice = 0;
     }
   };
 };

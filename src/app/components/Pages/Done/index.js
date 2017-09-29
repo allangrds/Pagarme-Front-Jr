@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Done.styl';
 import Numeral from './../../../helpers/Numeral';
-import { store } from './../../../flux';
+import { store, actions } from './../../../flux';
 import {
   Alert,
   Container,
@@ -25,6 +25,10 @@ export default class Done extends Component {
       (prevVal, elem) => prevVal + elem.price,
       0
     );
+
+    actions.checkout.resetCheckout().then(() => {
+      store.checkout.emit('insertedGameToCheckout');
+    });
 
     this.setState({
       totalPrice
