@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Done.styl';
+import styles_others from './../../../../assets/css/others/classes.styl';
 import Numeral from './../../../helpers/Numeral';
 import { store, actions } from './../../../flux';
 import {
@@ -52,7 +53,7 @@ export default class Done extends Component {
             </Col>
           </Row>
           <Row>
-            <Col md="4">
+            <Col xs="12" sm="12" md="4" className={styles_others.margin_bottom_20}>
               <Card>
                 <CardBlock>
                   <CardTitle>Fornecedor</CardTitle>
@@ -70,7 +71,7 @@ export default class Done extends Component {
                 </CardBlock>
               </Card>
             </Col>
-            <Col md="4">
+            <Col xs="12" sm="12" md="4" className={styles_others.margin_bottom_20}>
               <Card>
                 <CardBlock>
                   <CardTitle>Eu</CardTitle>
@@ -88,7 +89,7 @@ export default class Done extends Component {
                 </CardBlock>
               </Card>
             </Col>
-            <Col md="4">
+            <Col xs="12" sm="12" md="4" className={styles_others.margin_bottom_20}>
               <Card>
                 <CardBlock>
                   <CardTitle>Meu amigo</CardTitle>

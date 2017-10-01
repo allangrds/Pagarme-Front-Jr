@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { actions, store } from './../../../flux';
 import styles from './GamesList.styl';
+import styles_others from './../../../../assets/css/others/classes.styl';
 import Numeral from './../../../helpers/Numeral';
 import { Link } from 'react-router-dom';
 
@@ -45,7 +46,7 @@ export default class List extends Component {
                     sm="6"
                     xs="12"
                     key={id}
-                    className={styles.game_item}
+                    className={styles_others.margin_bottom_20}
                   >
                     <Card>
                       <CardImg

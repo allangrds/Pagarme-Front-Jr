@@ -27,17 +27,14 @@ const CheckoutStores = Flux.createStore(storeCheckout, function(payload) {
   switch (payload.actionType) {
     case 'CHECKOUTADDGAME':
       CheckoutStores.setGamesList(payload.data);
-      CheckoutStores.increaseTotalAmount();
       break;
 
     case 'CHECKOUTRESETLIST':
-      CheckoutStores.resetTotalAmount();
       CheckoutStores.resetGamesList();
       break;
 
     case 'CHECKOUTOVERWRITE':
       CheckoutStores.overwriteGamesList(payload.data);
-      CheckoutStores.decreaseTotalAmount();
       break;
 
     default:

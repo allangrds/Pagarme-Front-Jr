@@ -26,11 +26,14 @@ export default class Base extends Component {
   }
 
   componentDidMount() {
-    store.checkout.on('insertedGameToCheckout', () =>
+    store.checkout.on('insertedGameToCheckout', () => {
+      const gamesList = store.checkout.getGamesList();
+      const amount = gamesList.length;
+      
       this.setState({
-        amount: store.checkout.getTotalAmount()
-      })
-    );
+        amount
+      });
+    });
   }
 
   toggle() {
