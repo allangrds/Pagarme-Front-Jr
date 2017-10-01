@@ -29,19 +29,25 @@ export default class Checkout extends Component {
   }
 
   calculateTotalPrice(gamesList) {
-    let totalPrice = gamesList.reduce(
+    const totalPrice = gamesList.reduce(
       (prevVal, elem) => prevVal + elem.price,
       0
     );
 
-    totalPrice *= 100;
-    totalPrice = parseInt(totalPrice.toFixed(0));
-
     return totalPrice;
+  }
+
+  parseToCents(value) {
+    value *= 100;
+    value = parseInt(value.toFixed(0));
+
+    return value;
   }
 
   makePagarmeTransaction() {
     let { totalPrice } = this.state;
+
+    totalPrice = this.parseToCents(totalPrice);
 
     this.setState({ loading: true });
 

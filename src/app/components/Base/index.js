@@ -45,8 +45,12 @@ export default class Base extends Component {
     return (
       <div>
         <Navbar toggleable className={styles.navbar_dark}>
-          <NavbarToggler right onClick={this.toggle} />
-          <Container>
+          <NavbarToggler
+            right
+            onClick={this.toggle}
+            className={styles.navbar_toggler_light}
+          />
+          <Container className={styles.container_min_width}>
             <Link
               className={classNames('navbar-brand', styles.navbar_link_white)}
               to="/"
