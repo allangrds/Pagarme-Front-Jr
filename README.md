@@ -20,4 +20,14 @@ Cumprindo o objetivo principal, você está livre para criar e adicionar feature
 
 Documentação da API (https://docs.pagar.me/reference)
 
-# Sobre o projeto
+# Como rodar o projeto
+
+
+### Instale as dependências
+`npm install`
+
+### Compile o projeto
+`npm start`
+
+### Acesse o projeto
+`localhost:3000`
