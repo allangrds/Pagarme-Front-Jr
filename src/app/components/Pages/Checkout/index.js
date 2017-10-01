@@ -44,87 +44,91 @@ export default class Checkout extends Component {
     return value;
   }
 
+  createTransactionItems(gamesList) {
+    const items = gamesList.map(({ id, name, price }) => {
+      price = this.parseToCents(price);
+
+      return {
+        id: id.toString(),
+        title: name,
+        unit_price: price,
+        quantity: 1,
+        tangible: true
+      };
+    });
+
+    return items;
+  }
+
   makePagarmeTransaction() {
-    let { totalPrice } = this.state;
+    let { totalPrice, gamesList } = this.state;
+    const items = this.createTransactionItems(gamesList);
 
     totalPrice = this.parseToCents(totalPrice);
 
     this.setState({ loading: true });
 
+    let transactionObj = {
+      amount: totalPrice,
+      customer: {
+        external_id: '#3311',
+        name: 'Morpheus Fishburne',
+        type: 'individual',
+        country: 'br',
+        email: 'mopheus@nabucodonozor.com',
+        documents: [
+          {
+            type: 'cpf',
+            number: '00000000000'
+          }
+        ],
+        phone_numbers: ['+5511999998888', '+5511888889999'],
+        birthday: '1965-01-01'
+      },
+      billing: {
+        name: 'Trinity Moss',
+        address: {
+          country: 'br',
+          state: 'sp',
+          city: 'Cotia',
+          neighborhood: 'Rio Cotia',
+          street: 'Rua Matrix',
+          street_number: '9999',
+          zipcode: '06714360'
+        }
+      },
+      card_number: '4111111111111111',
+      card_holder_name: 'abc',
+      card_expiration_date: '1225',
+      card_cvv: '123',
+      split_rules: [
+        {
+          recipient_id: 're_cj83vzn8y02p4jb6exgeepjvn',
+          percentage: 60,
+          liable: true,
+          charge_processing_fee: true
+        },
+        {
+          recipient_id: 're_cj83vxw0z02l0jp6etrgf6y2q',
+          percentage: 25,
+          liable: true,
+          charge_processing_fee: true
+        },
+        {
+          recipient_id: 're_cj83vz1ce02giof6dyduizo7b',
+          percentage: 15,
+          liable: true,
+          charge_processing_fee: true
+        }
+      ]
+    };
+    transactionObj['items'] = items;
+
     pagarme.client
       .connect({ api_key: 'ak_test_LruwUrqpEUK9qhGhSKDteaFg894egM' })
       .then(client =>
         client.transactions
-          .create({
-            amount: totalPrice,
-            customer: {
-              external_id: '#3311',
-              name: 'Morpheus Fishburne',
-              type: 'individual',
-              country: 'br',
-              email: 'mopheus@nabucodonozor.com',
-              documents: [
-                {
-                  type: 'cpf',
-                  number: '00000000000'
-                }
-              ],
-              phone_numbers: ['+5511999998888', '+5511888889999'],
-              birthday: '1965-01-01'
-            },
-            billing: {
-              name: 'Trinity Moss',
-              address: {
-                country: 'br',
-                state: 'sp',
-                city: 'Cotia',
-                neighborhood: 'Rio Cotia',
-                street: 'Rua Matrix',
-                street_number: '9999',
-                zipcode: '06714360'
-              }
-            },
-            items: [
-              {
-                id: 'r123',
-                title: 'Red pill',
-                unit_price: 10000,
-                quantity: 1,
-                tangible: true
-              },
-              {
-                id: 'b123',
-                title: 'Blue pill',
-                unit_price: 10000,
-                quantity: 1,
-                tangible: true
-              }
-            ],
-            card_number: '4111111111111111',
-            card_holder_name: 'abc',
-            card_expiration_date: '1225',
-            card_cvv: '123',
-            split_rules: [
-              {
-                recipient_id: 're_cj83vzn8y02p4jb6exgeepjvn',
-                percentage: 60,
-                liable: true,
-                charge_processing_fee: true
-              },
-              {
-                recipient_id: 're_cj83vxw0z02l0jp6etrgf6y2q',
-                percentage: 25,
-                liable: true,
-                charge_processing_fee: true
-              },
-              {
-                recipient_id: 're_cj83vz1ce02giof6dyduizo7b',
-                percentage: 15,
-                liable: true,
-                charge_processing_fee: true
-              }
-            ]
-          })
+          .create(transactionObj)
           .then(res => {
             actions.transaction
               .registerTransaction(res)
