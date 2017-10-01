@@ -27,7 +27,7 @@ export default class GamesProfile extends Component {
     actions.checkout
       .addGame(game)
       .then(() => {
-        store.checkout.emit('insertedGameToCheckout');
+        store.checkout.emit('checkoutGamesModified');
         this.showNotification(
           'Sucesso',
           'Game adicionado ao carrinho',

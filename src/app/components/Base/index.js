@@ -26,7 +26,7 @@ export default class Base extends Component {
   }
 
   componentDidMount() {
-    store.checkout.on('insertedGameToCheckout', () => {
+    store.checkout.on('checkoutGamesModified', () => {
       const gamesList = store.checkout.getGamesList();
       const amount = gamesList.length;
       

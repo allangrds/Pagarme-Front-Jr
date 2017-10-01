@@ -126,14 +126,25 @@ export default class Checkout extends Component {
             ]
           })
           .then(res => {
-            const url = '/done';
-            this.props.history.push(url);
+            actions.transaction
+              .registerTransaction(res)
+              .then(() => {
+                this.redirectToDone();
+              })
+              .catch(() => {
+                this.redirectToDone();
+              });
           })
           .catch(() => {
             this.setState({ loading: false });
             this.showNotification('Erro', 'Pedido não concluido', 'error');
           })
       );
+  }
+
+  redirectToDone() {
+    const url = '/done';
+    this.props.history.push(url);
   }
 
   findGameToRemove(array, length, gameToRemoveId) {
@@ -176,7 +187,7 @@ export default class Checkout extends Component {
     });
 
     actions.checkout.overwriteCheckout(gamesList).then(() => {
-      store.checkout.emit('insertedGameToCheckout');
+      store.checkout.emit('checkoutGamesModified');
       this.showNotification('Sucesso', 'Game excluído', 'success');
     });
   }
