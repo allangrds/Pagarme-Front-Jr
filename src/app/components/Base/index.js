@@ -18,21 +18,12 @@ export default class Base extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false,
-      amount: 0
-    };
+    this.state = { isOpen: false };
   }
 
   componentDidMount() {
     store.checkout.on('checkoutGamesModified', () => {
-      const gamesList = store.checkout.getGamesList();
-      const amount = gamesList.length;
-      
-      this.setState({
-        amount
-      });
+      this.forceUpdate();
     });
   }
 
@@ -43,14 +34,15 @@ export default class Base extends Component {
   }
 
   render() {
-    const { amount } = this.state;
+    const gamesList = store.checkout.getGamesList();
+    const amount = gamesList.length;
 
     return (
       <div>
         <Navbar toggleable className={styles.navbar_dark}>
           <NavbarToggler
             right
-            onClick={this.toggle}
+            onClick={this.toggle.bind(this)}
             className={styles.navbar_toggler_light}
           />
           <Container className={styles.container_min_width}>
