@@ -75,7 +75,7 @@ const aliases = {
   store: {
     games: GamesStores,
     checkout: CheckoutStores,
-    transaction: TransactionStores,
+    transaction: TransactionStores
   }
 };
 

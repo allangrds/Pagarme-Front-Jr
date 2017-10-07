@@ -62,7 +62,7 @@ export default class List extends Component {
                           <Numeral value={price} format="$ 0,0.00" />
                         </CardText>
                         <Link
-                          className="btn btn-lg btn-primary"
+                          className="btn btn-lg btn-primary btn-block"
                           to={{ pathname: `/games/${id}` }}
                         >
                           Ver detalhes
