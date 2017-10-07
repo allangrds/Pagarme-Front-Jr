@@ -22,6 +22,14 @@ export default class Done extends Component {
     this.state = { items: [] };
   }
 
+  componentWillMount() {
+    const gamesList = store.checkout.getGamesList();
+    if (gamesList.length === 0) {
+      let path = '/';
+      this.props.history.push(path);
+    }
+  }
+
   componentDidMount() {
     const gamesList = store.checkout.getGamesList();
     const totalPrice = gamesList.reduce(
