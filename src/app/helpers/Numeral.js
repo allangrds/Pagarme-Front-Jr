@@ -9,9 +9,8 @@ export default class Numeral extends Component {
 
   render() {
     const { format, value } = this.props;
-    const validValue = !isNaN(value) ? value : 0;
 
-    return <span>{numeral(validValue).format(format)}</span>;
+    return <span>{numeral(value).format(format)}</span>;
   }
 }
 
