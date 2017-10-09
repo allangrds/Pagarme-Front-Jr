@@ -14,5 +14,3 @@ const useMethod = methodName => (endpoint, config) =>
 const GET = useMethod('GET');
 
 export { GET };
-
-export default apiFetch;
